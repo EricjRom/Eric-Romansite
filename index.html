@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eric J Roman</title>
+  <style>
+    /* Reset and base styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* Customize your mouse cursor:
+       For best compatibility, use a PNG, CUR, or ICO file.
+       Here, 'custom_cursor.png' is used with hotspot coordinates (16 16) for a 32×32 image.
+       Replace the URL with your own custom cursor image if needed.
+    */
+    body, button, a {
+      cursor: url('png') 16 16, auto;
+    }
+    /* Disturbing vibe with low-quality text effect */
+    body {
+      filter: blur(0.7px) contrast(0.8);
+      background: #441111 url('https://media-hosting.imagekit.io/9c592e2bedf44dd4/flesh_texture.jpg?Expires=1838962000&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=EN4GGJHV8mnbdzuwp9CNJe-eKyO1eAIG7o4IJRe6RR~2zx1n1EvudSY6fzY97~1JhPlHWOGNE9ViZv46jA9E9iv16WNAA2WBLybr-51CPIeilILCtelAtxQG5X6WJYE037WDfrr-4B1GbFZQzljTv8NJAN5RTNVkIGpbWKoPaZ8qkMAOy-UCCNtIjPe5~pg50XLGwZJiAnaz-RhnvIs6~EctUOFv7dJ73vPCmLhZNbiStivnWsfu6CYALjsv9DDyR2YwPduqiDkqnV-IuQBLdqWzxLJeN2Ak91dBk1P2Jf3qZGqJmYy6he2sIulWuMeQRsnCpEUMNyt0E6cQ5Nanrw__') repeat;
+      font-family: sans-serif;
+      color: #ffdddd;
+      overflow-x: hidden;
+    }
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    /* Header styling with image-filled text.
+       The text "Eric J Roman" will be filled with the image "gorename.jpg".
+       Ensure "gorename.jpg" is in the same folder or update the URL accordingly.
+    */
+    header {
+      background: #660000 url('https://media-hosting.imagekit.io/9b45a73cf102406c/teethh.jpg?Expires=1838964778&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=NHdFysTDgJbc9e7ZDpFZUrKWJ-cjQDsyNFf6k0hiqa8-Ompgnz8BnN-MnmXAPqFo~aLfw9EVH2TYSnj-3AUaT68ltfbwHDUTQ3QphbLo-d5vHZraBOPmQyhnH0tCtgIVDbJDa5RSAe5lwQjaLLYUbJ7vqcmqsqrs6RQi66E2H4b30k2A1WIVckAi9bRS0ywDYeCajI9KdW2jexgwa2d~T8kL425tMDYJQQNfCR4DK0hJsPTxzyrGEljQJVFV9j8dO6JZy3kQNVQzL1jZaIJ0gbcxXELNtR64IHbE5hdwhPipsKGaPKckCFv2It4kJcZYbcN92x8UeefstUZG1neidQ__') center/cover no-repeat;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 3px solid #330000;
+    }
+    header h1 {
+      font-family: sans-serif;
+      font-size: 4rem;
+      /* Fill the text with the "gorename.jpg" image */
+      color: transparent;
+      background: url('https://media-hosting.imagekit.io/9c592e2bedf44dd4/flesh_texture.jpg?Expires=1838962000&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=EN4GGJHV8mnbdzuwp9CNJe-eKyO1eAIG7o4IJRe6RR~2zx1n1EvudSY6fzY97~1JhPlHWOGNE9ViZv46jA9E9iv16WNAA2WBLybr-51CPIeilILCtelAtxQG5X6WJYE037WDfrr-4B1GbFZQzljTv8NJAN5RTNVkIGpbWKoPaZ8qkMAOy-UCCNtIjPe5~pg50XLGwZJiAnaz-RhnvIs6~EctUOFv7dJ73vPCmLhZNbiStivnWsfu6CYALjsv9DDyR2YwPduqiDkqnV-IuQBLdqWzxLJeN2Ak91dBk1P2Jf3qZGqJmYy6he2sIulWuMeQRsnCpEUMNyt0E6cQ5Nanrw__') no-repeat;
+      background-size: cover;
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-shadow: 2px 2px 6px #000, 0 0 10px #ff1111;
+      letter-spacing: 3px;
+      margin: 0;
+      line-height: 1.2;
+    }
+    /* Main layout mimicking YouTube’s interface */
+    main {
+      display: flex;
+      width: 90%;
+      margin: 20px auto;
+      gap: 20px;
+      flex: 1;
+    }
+    .main-content {
+      flex: 2;
+      background: rgba(102, 0, 0, 0.7);
+      padding: 20px;
+      border: 3px solid #330000;
+    }
+    /* Video player area: Embedding the YouTube video with autoplay (muted) */
+    .video-player {
+      position: relative;
+      height: 400px;
+      margin-bottom: 20px;
+      border: 2px solid #ff0000;
+      box-shadow: inset 0 0 20px #000;
+    }
+    .video-player iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .video-info {
+      background: rgba(255, 0, 0, 0.2);
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 2px solid #330000;
+    }
+    .video-info h2 {
+      font-size: 1.8rem;
+      color: #ff4444;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 2px #000;
+    }
+    .video-info p {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #ffdddd;
+    }
+    .engagement {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    .engagement span {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .engagement button {
+      background: #aa0000;
+      border: 2px solid #ff0000;
+      color: #ffdddd;
+      padding: 5px 10px;
+      cursor: url('https://example.com/custom_cursor.png') 16 16, auto;
+      font-family: monospace;
+      box-shadow: 0 0 5px #000;
+    }
+    .engagement button:hover { background: #ff2222; }
+    /* Comment section styling */
+    .comments {
+      background: rgba(102, 0, 0, 0.8);
+      border: 2px dashed #660000;
+      padding: 10px;
+      box-shadow: 0 0 10px #000 inset;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .comments h3 {
+      margin-bottom: 10px;
+      color: #ff6666;
+      text-shadow: 1px 1px 2px #000;
+    }
+    .comment {
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #330000;
+      background: rgba(255, 0, 0, 0.1);
+    }
+    .comment .author {
+      font-weight: bold;
+      color: #ff9999;
+      margin-bottom: 5px;
+      text-shadow: 1px 1px 2px #000;
+    }
+    /* Sidebar for social media links and recommended videos */
+    aside {
+      flex: 1;
+      background: rgba(102, 0, 0, 0.7);
+      padding: 20px;
+      border: 3px solid #330000;
+      max-width: 300px;
+    }
+    aside h2 {
+      font-size: 1.4rem;
+      color: #ff4444;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 2px #000;
+    }
+    .recommendation {
+      background: rgba(255, 0, 0, 0.1);
+      border: 2px solid #660000;
+      margin-bottom: 10px;
+      padding: 10px;
+      text-shadow: 1px 1px 1px #000;
+    }
+    .recommendation a {
+      color: #ffbbbb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .recommendation a:hover {
+      text-shadow: 2px 2px 4px #000;
+      color: #fff;
+    }
+    /* Recommended Videos section */
+    .recommended {
+      margin-top: 20px;
+    }
+    .recommended h3 {
+      font-size: 1.4rem;
+      color: #ff4444;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 2px #000;
+    }
+    .recommended a {
+      display: block;
+      margin-bottom: 10px;
+    }
+    .recommended img {
+      width: 100%;
+      border: 2px solid #660000;
+    }
+    /* Footer styling */
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #330000;
+      color: #ffdddd;
+      border-top: 3px solid #660000;
+    }
+  </style>
+</head>
+<body>
+  <!-- Auto-playing background audio (update 'liveleak.mp3' as needed) -->
+  <audio id="bg-music" autoplay loop hidden>
+    <source src="LiveLeak.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <div class="wrapper">
+    <header>
+      <h1>Eric J Roman</h1>
+    </header>
+    <main>
+      <div class="main-content">
+        <!-- Video player area with embedded YouTube video (autoplay enabled and muted) -->
+        <div class="video-player">
+          <iframe src="https://www.youtube.com/embed/g4XFHuK2iWM?autoplay=1&mute=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <h2>Civil Engineering With Environmental Emphasis at the University of Kansas</h2>
+          <p>
+            Hi everyone!! dont be scared i just made this website look scary as a crerative 
+            outlet inspired by "Username666" a youtube legend. 
+            This is not meant to be a professional website so if you 
+            are someone important this is just for funnies. 
+          </p>
+          <div class="engagement">
+            <span>666,666 views</span>
+            <span>
+              <button id="likeBtn">Like</button>
+              <span id="likeCount">666</span>
+              <button id="dislikeBtn">Dislike</button>
+              <span id="dislikeCount">123</span>
+            </span>
+          </div>
+        </div>
+        <div class="comments">
+          <h3>Comments</h3>
+          <div class="comment">
+            <div class="author">Username666</div>
+            <div class="content">Livestream it.</div>
+          </div>
+          <div class="comment">
+            <div class="author">Annika139223458</div>
+            <div class="content">kill yourself on stream.</div>
+          </div>
+          <div class="comment">
+            <div class="author">ShadowWhisper</div>
+            <div class="content">Shadows creep in, whispering my name...</div>
+          </div>
+          <div class="comment">
+            <div class="author">NightmareFuel</div>
+            <div class="content">The void calls in silence...</div>
+          </div>
+          <div class="comment">
+            <div class="author">GhoulGazer</div>
+            <div class="content">Your nightmares are my playground...</div>
+          </div>
+          <div class="comment">
+            <div class="author">ISeeYou</div>
+            <div class="content">I see you...</div>
+          </div>
+          <!-- Additional static scary comments -->
+          <div class="comment">
+            <div class="author">EerieEyes</div>
+            <div class="content">The night whispers secrets untold...</div>
+          </div>
+          <div class="comment">
+            <div class="author">MournfulWraith</div>
+            <div class="content">Even the moon hides behind the veil of despair.</div>
+          </div>
+          <div class="comment">
+            <div class="author">CreepingSilence</div>
+            <div class="content">Silence shatters into screams in the abyss.</div>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <h2>Connect with Me!</h2>
+        <div class="recommendation">
+            <a href="https://www.linkedin.com/in/eric-roman-772353332?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
+            " target="_blank">LinkedIn</a>
+        </div>
+        <div class="recommendation">
+          <a href="https://www.instagram.com/ericr.jpg?igsh=MWtldnFyZ3VqdzJwYw%3D%3D&utm_source=qr
+          " target="_blank">Instagram</a>
+        </div>
+        <div class="recommendation">
+          <a href="https://boxd.it/8h9SD
+          " target="_blank">Letterboxd</a>
+        </div>
+        <div class="recommendation">
+          <a href="https://www.tiktok.com/@eric21r?_t=ZT-8vRzfykHkio&_r=1
+          " target="_blank">Tiktok</a>
+        </div>
+        <div class="recommendation">
+            <a href="https://x.com/eric__roman?s=21&t=bgCfYmoKrwtgs3fA6ohB7g
+            " target="_blank">Twitter</a>
+          </div>
+        <!-- Recommended Videos Section -->
+        <div class="recommended">
+          <h3>Recommended Videos</h3>
+          <a href="https://youtu.be/T09iknuzDlw?si=RmMm_p7FxFqkJLdl" target="_blank">
+            <img src="https://img.youtube.com/vi/T09iknuzDlw/hqdefault.jpg" alt="Recommended Video 1">
+          </a>
+          <a href="https://youtu.be/wvHa2y-pKD8?si=gj4jk_hxJMxph7Z3" target="_blank">
+            <img src="https://img.youtube.com/vi/wvHa2y-pKD8/hqdefault.jpg" alt="Recommended Video 2">
+          </a>
+          <a href="https://youtu.be/6gYBXRwsDjY?si=GVD9zLx9Pn_O9iUK" target="_blank">
+            <img src="https://img.youtube.com/vi/6gYBXRwsDjY/hqdefault.jpg" alt="Recommended Video 3">
+          </a>
+        </div>
+      </aside>
+    </main>
+    <footer>
+      &copy; gorecore2025 EricJRoman – All Rights Reserved Cunt
+    </footer>
+  </div>
+
+  <script>
+    // Like and Dislike Counter Functionality
+    var likeCount = parseInt(document.getElementById("likeCount").textContent);
+    var dislikeCount = parseInt(document.getElementById("dislikeCount").textContent);
+    
+    document.getElementById("likeBtn").addEventListener("click", function(){
+      likeCount++;
+      document.getElementById("likeCount").textContent = likeCount;
+    });
+    
+    document.getElementById("dislikeBtn").addEventListener("click", function(){
+      dislikeCount++;
+      document.getElementById("dislikeCount").textContent = dislikeCount;
+    });
+
+    // Dynamic Comments Functionality
+    var scaryUsernames = ["PhantomReaper", "DarkWhisper", "SilentShadow", "GrimFate", "NightStalker", "DeathlyEcho"];
+    var scaryMessages = [
+      "The darkness is coming for you...",
+      "I see your soul trembling in the void.",
+      "There is no escape from the eternal night.",
+      "Whispers echo in the corridors of your mind.",
+      "The abyss gazes back at you.",
+      "Fate is sealed in blood and shadows."
+    ];
+    var concernedUsernames = ["ConcernedCitizen", "WorriedMom", "AlarmedWatcher", "FrightenedNeighbor"];
+    var concernedMessages = [
+      "I can't believe what I'm seeing... is this real?",
+      "Something terrifying is happening... someone please help!",
+      "It looks like a live kidnapping is unfolding.",
+      "I feel like I'm witnessing something horrible..."
+    ];
+
+    function addNewComment() {
+      var commentsDiv = document.querySelector(".comments");
+      // Get the header element so we insert after it
+      var header = commentsDiv.querySelector("h3");
+      
+      var newComment = document.createElement("div");
+      newComment.className = "comment";
+      
+      var authorDiv = document.createElement("div");
+      authorDiv.className = "author";
+      
+      var contentDiv = document.createElement("div");
+      contentDiv.className = "content";
+      
+      // Randomly choose between scary and concerned comment style
+      if (Math.random() < 0.5) {
+        var randomUsername = scaryUsernames[Math.floor(Math.random() * scaryUsernames.length)];
+        var randomMessage = scaryMessages[Math.floor(Math.random() * scaryMessages.length)];
+      } else {
+        var randomUsername = concernedUsernames[Math.floor(Math.random() * concernedUsernames.length)];
+        var randomMessage = concernedMessages[Math.floor(Math.random() * concernedMessages.length)];
+      }
+      
+      authorDiv.textContent = randomUsername;
+      contentDiv.textContent = randomMessage;
+      
+      newComment.appendChild(authorDiv);
+      newComment.appendChild(contentDiv);
+      
+      // Insert the new comment immediately after the header so it remains visible at the top of the comment list
+      commentsDiv.insertBefore(newComment, header.nextSibling);
+    }
+
+    // Add a new comment every 5 seconds
+    setInterval(addNewComment, 5000);
+  </script>
+</body>
+</html>
